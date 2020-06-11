@@ -18,4 +18,4 @@
     - [ ] show
     - [ ] download
 
-   - [ ] PBN Module (this contains logic to convert an image to PBN)
+ - [ ] PBN Module (this contains logic to convert an image to PBN)
