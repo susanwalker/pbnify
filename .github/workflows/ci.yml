@@ -14,15 +14,17 @@ jobs:
     - uses: actions/checkout@v2
     - name: Setup System
       run: |
-        sudo apt-get install libsqlite3-dev
+        sudo apt-get update
+        sudo apt-get install -y libsqlite3-dev
     - name: Set up Ruby
       uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
       with:
-        ruby-version: 2.6
+        ruby-version: 2.6.5
     - name: Install dependencies
       run: bundle install
     - name: Run tests
       run: |
+        yarn install --check-files
         bundle exec rails db:create
         bundle exec rails db:migrate
         bundle exec rspec
