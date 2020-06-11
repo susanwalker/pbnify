@@ -1,8 +1,8 @@
 # PBNify
 
 ## TODO
- - [ ] Models:
-  - [ ] Request
+ - [X] Models:
+  - [X] Request
     * input_image
     * output_image
     * input_params (maybe)
