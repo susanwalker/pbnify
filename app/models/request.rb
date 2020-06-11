@@ -4,5 +4,5 @@ class Request < ApplicationRecord
   has_one_attached :output_image
 
   # This validates that every new request has an input image
-  validate :input_image, presence: true
+  validates :input_image, presence: true
 end
