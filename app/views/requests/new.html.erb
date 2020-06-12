@@ -1,0 +1,8 @@
+<h1>Welcome to PBNify!</h1>
+
+<h2>Upload an image for PBNification</h2>
+
+<%= form_with model: @request, class: "nifty_form" do |f| %>
+  <%= f.file_field :input_image %>
+  <%= f.submit "Create" %>
+<% end %>
