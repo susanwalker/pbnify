@@ -2,7 +2,19 @@
 
 <h2>Upload an image for PBNification</h2>
 
-<%= form_with model: @request, class: "nifty_form" do |f| %>
+<% if @request.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+    <ul>
+    <% @request.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @request do |f| %>
   <%= f.file_field :input_image %>
-  <%= f.submit "Create" %>
+  <%= f.submit %>
 <% end %>
