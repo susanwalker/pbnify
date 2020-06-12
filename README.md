@@ -7,18 +7,18 @@
     * output_image
     * input_params (maybe)
 
- - [ ] Views:
-   - [ ] new_request_form (also the landing page)
-   - [ ] show_request_form
+ - [X] Views:
+   - [X] new_request_form (also the landing page)
+   - [X] show_request_form
 
- - [ ] Controllers:
-   - [ ] RequestsController
-    - [ ] new
-    - [ ] create
-    - [ ] show
-    - [ ] download
+ - [X] Controllers:
+   - [X] RequestsController
+    - [X] new
+    - [X] create
+    - [X] show
+    - [X] download
 
- - [ ] PBN Module (this contains logic to convert an image to PBN)
+ - [X] PBN Module (this contains logic to convert an image to PBN)
 
 
 ## Notes
