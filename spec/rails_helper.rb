@@ -11,6 +11,14 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+require 'selenium/webdriver'
+require 'capybara-screenshot/rspec'
+Capybara.javascript_driver = :selenium_chrome_headless
+
+Capybara::Screenshot.register_driver(:selenium_chrome_headless) do |driver, path|
+  driver.browser.save_screenshot(path)
+end
+
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -19,4 +27,8 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
+
+  config.before(:each, type: :system) do
+		driven_by(:selenium_chrome_headless)
+	end
 end
