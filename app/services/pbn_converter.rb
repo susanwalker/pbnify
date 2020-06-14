@@ -2,7 +2,7 @@ require 'tempfile'
 
 module PbnConverter
   def self.update(request)
-    # TODO figure out later
+    # This returns a file path to the input
     input_path =
       ActiveStorage::Blob.service.send(:path_for, request.input_image.key)
     output_path = generate_pbnified(input_path)
@@ -10,7 +10,6 @@ module PbnConverter
   end
 
   def self.generate_pbnified(input_path)
-    # TODO: figure this out later
     color_map = spit_out_colors(input_path)
     color_map = remove_insignificant_colors(color_map)
 
@@ -27,6 +26,7 @@ module PbnConverter
     output.split(' ').map do |string|
       string.match(string_regex)
     end.inject({}) do |r, s|
+      # TODO space out colors
       r.merge!(s[3] => [s[1], s[2]])
     end
   end
