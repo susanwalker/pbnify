@@ -1,3 +1,7 @@
 <h2>Final PBNified image</h2>
 
-<%= image_tag(url_for(@request.output_image), class: "img-responsive") %>
+<% if @request.output_image.present? %>
+  <%= image_tag(url_for(@request.output_image), class: "img-responsive") %>
+<% else  %>
+  <h3>No output available</h3>
+<% end %>
