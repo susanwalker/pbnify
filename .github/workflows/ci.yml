@@ -31,9 +31,13 @@ jobs:
         sudo chmod 0755 /usr/local/bin/chromedriver
     - name: Install dependencies
       run: bundle install
+      env:
+        RAILS_ENV: test
     - name: Run tests
       run: |
         yarn install --check-files
         bundle exec rails db:create
         bundle exec rails db:migrate
         bundle exec rspec
+      env:
+        RAILS_ENV: test
