@@ -4,11 +4,18 @@ class RequestsController < ApplicationController
   end
 
   def create
-    new_request_params = params.permit(:authenticity_token, :commit, request: [:input_image])[:request]
+    # permit is used to whitelist the params that you expect to get from the UI
+    new_request_params =
+      params.permit(
+        :authenticity_token,
+        :commit,
+        request: [:input_image]
+      )[:request]
     @request = Request.new(new_request_params)
 
     if @request.save
       PbnConverter.update(@request)
+      #request_url goes to show page 
       redirect_to request_url(@request)
     else
       render 'new'
