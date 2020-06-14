@@ -1,6 +1,8 @@
 require 'tempfile'
 
 module PbnConverter
+  # Public 
+
   def self.update(request)
     # This returns a file path to the input
     input_path =
@@ -8,6 +10,8 @@ module PbnConverter
     output_path = generate_pbnified(input_path)
     request.output_image.attach(io: File.open(output_path), filename: 'output.png')
   end
+
+  # Private
 
   def self.generate_pbnified(input_path)
     color_map = spit_out_colors(input_path)
