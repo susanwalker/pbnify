@@ -137,14 +137,6 @@ module PbnConverter
     # being processed that's why we use tempfile which creates random file names
     temp_output = Tempfile.new(['image_output', '.png'])
 
-    puts <<-COMMAND
-    convert #{input_path} -fuzz 10% \
-    #{transparent_string} \
-    -font Arial -pointsize #{pointsize} -fill black -draw "\
-    #{text_string} \
-    " \
-    -border 20 #{temp_output.path}
-    COMMAND
 
     `convert #{input_path} -fuzz 10% \
      -fill white #{transparent_string} \

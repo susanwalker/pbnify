@@ -21,13 +21,15 @@
  - [X] PBN Module (this contains logic to convert an image to PBN)
   - [X] Improve PBN Module
 
+- [X] Install ImageMagick to CI
+
 - [X] HTTP Basic Authentication
 
 - [X] Remove requests that are 15mins old
 
-- [ ] Set up deploy to Heroku
+- [X] Set up deploy to Heroku
 
-- [ ] Set up CD from GitHub to deploy to Heroku when merged to master
+- [X] Set up CD from GitHub to deploy to Heroku when merged to master
 
 
 ## Notes
@@ -45,3 +47,8 @@
 ## Adding tailwind
 
 - Follow this blog post: https://medium.com/@davidteren/rails-6-and-tailwindcss-getting-started-42ba59e45393
+
+
+## Heroku Integration
+
+- Follow this post: https://devcenter.heroku.com/articles/getting-started-with-rails4#heroku-gems

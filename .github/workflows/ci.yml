@@ -20,12 +20,6 @@ jobs:
       uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
       with:
         ruby-version: 2.6.5
-    - name: Install ImageMagick
-      run: |
-        wget https://imagemagick.org/download/binaries/magick
-        sudo mv -f magick /usr/local/bin/magick
-        # alias convert=magick
-        convert --version
     - name: Install Chromedriver
       run: |
         # Install Chromedriver
