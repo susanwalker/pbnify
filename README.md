@@ -19,6 +19,13 @@
     - [X] download
 
  - [X] PBN Module (this contains logic to convert an image to PBN)
+  - [ ] Improve PBN Module
+
+- [ ] HTTP Basic Authentication
+
+- [ ] Set up deploy to Heroku
+
+- [ ] Set up CD from GitHub to deploy to Heroku when merged to master
 
 
 ## Notes
