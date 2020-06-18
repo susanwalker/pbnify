@@ -15,7 +15,7 @@ class RequestsController < ApplicationController
 
     if @request.save
       PbnConverter.update(@request)
-      #request_url goes to show page 
+      #request_url goes to show page
       redirect_to request_url(@request)
     else
       render 'new'
