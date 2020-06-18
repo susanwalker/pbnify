@@ -26,7 +26,7 @@ RSpec.describe 'request#new', type: :system do
       let!(:filepath) { Rails.root.join('spec', 'support', 'test_image.png') }
 
       it 'renders the show page of the request with an output image' do
-        attach_file 'request_input_image', filepath
+        attach_file 'request_input_image', filepath, make_visible: true
         click_button 'Create Request'
         expect(current_path).not_to eq('/requests')
         expect(page).to have_text('Final PBNified Image')
