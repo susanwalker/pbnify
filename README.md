@@ -19,15 +19,15 @@
     - [X] download
 
  - [X] PBN Module (this contains logic to convert an image to PBN)
-  - [ ] Improve PBN Module
+  - [X] Improve PBN Module
 
-- [ ] HTTP Basic Authentication
+- [X] HTTP Basic Authentication
+
+- [ ] Remove requests that are 15mins old
 
 - [ ] Set up deploy to Heroku
 
 - [ ] Set up CD from GitHub to deploy to Heroku when merged to master
-
-- [ ] Remove requests that are 15mins old
 
 
 ## Notes
