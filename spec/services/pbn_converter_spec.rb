@@ -12,6 +12,10 @@ RSpec.describe PbnConverter do
       Request.new(input_image: input_image)
     end
 
+    before do
+      allow(PbnConverter).to receive(:remove_insignificant_colors) { |m| m }
+    end
+
     it 'adds an output_image to the request' do
       expect(request.output_image.present?).to eq(false)
       PbnConverter.update(request)

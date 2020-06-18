@@ -25,6 +25,10 @@ RSpec.describe 'request#new', type: :system do
     context 'when an input image is attached' do
       let!(:filepath) { Rails.root.join('spec', 'support', 'test_image.png') }
 
+      before do
+        allow(PbnConverter).to receive(:remove_insignificant_colors) { |m| m }
+      end
+      
       it 'renders the show page of the request with an output image' do
         attach_file 'request_input_image', filepath, make_visible: true
         click_button 'Create Request'
