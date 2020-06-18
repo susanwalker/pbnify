@@ -23,7 +23,7 @@
 
 - [X] HTTP Basic Authentication
 
-- [ ] Remove requests that are 15mins old
+- [X] Remove requests that are 15mins old
 
 - [ ] Set up deploy to Heroku
 
