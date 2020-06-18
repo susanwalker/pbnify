@@ -27,6 +27,8 @@
 
 - [ ] Set up CD from GitHub to deploy to Heroku when merged to master
 
+- [ ] Remove requests that are 15mins old
+
 
 ## Notes
 
