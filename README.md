@@ -32,3 +32,7 @@
 - Start with 10 most frequently occurring colors and get their coordinates
 161,213,srgba(255,144,0,1)
 `convert test_image_output_4.png -font Arial -pointsize 5 -draw "gravity south fill black text 33,44 '(1)'" test_image_output_5.png`
+
+## Adding tailwind
+
+- Follow this blog post: https://medium.com/@davidteren/rails-6-and-tailwindcss-getting-started-42ba59e45393

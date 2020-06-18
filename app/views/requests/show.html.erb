@@ -1,7 +1,19 @@
-<h2>Final PBNified Image</h2>
+<br /> <br /> <br />
+
+<p class="font-sans text-3xl text-gray-800 text-center">
+  Final PBNified Image
+</p>
+
+<br /> <br /> <br />
+
+<hr class="border-b m-0" />
+
+<br /> <br /> <br />
 
 <% if @request.output_image.present? %>
-  <%= image_tag(url_for(@request.output_image), class: "img-responsive") %>
+  <div class="flex items-center justify-center">
+    <%= image_tag(url_for(@request.output_image), height: '40', class: "img-responsive") %>
+  </div>
 <% else  %>
-  <h3>No output available</h3>
+  <p class="text-red-500">No output available</p>
 <% end %>

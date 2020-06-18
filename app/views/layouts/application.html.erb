@@ -6,10 +6,26 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <div class="container mx-auto text-center">
+    <div class="h-full">
+      <body>
+        <%= yield %>
+      </body>
+    </div>
+    <br /><br /><br /><br /><br /><br />
+
+    <hr class="border-b m-0" />
+
+    <footer class="text-sm p-10">
+      Thanks to my husband, Adi Iyengar for technical help, and to my brother, Tom
+      Walker for the original idea
+      <br />
+
+      © 2020 Susan Walker. All rights reserved
+    </footer>
+  </div>
 </html>
