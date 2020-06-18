@@ -2,6 +2,7 @@ require 'tempfile'
 
 module PbnConverter
   FUZZ_PERCENTAGE = 10
+  MINIMUM_FREQUENCY = 60
 
   # Public
 
@@ -18,8 +19,7 @@ module PbnConverter
   def self.generate_pbnified(input_path)
     color_map = spit_out_colors(input_path)
 
-    output_path = remove_colors_and_add_numbers(input_path, color_map)
-    return output_path
+    remove_colors_and_add_numbers(input_path, color_map)
   end
 
   def self.spit_out_colors(input_path)
@@ -27,23 +27,32 @@ module PbnConverter
     # output is of the form x,y,color x,y,color
     string_regex = /(\d*),(\d*),(.*)/
 
-    # { color1 => [x1, y1], color2 = [x2, y2] }
+    # { color1 => [x1, y1, frequency], color2 => [x2, y2, frequency2] }
     output.split(' ').map do |string|
       string.match(string_regex)
     end.inject({}) do |color_map, element|
-      if add_element_to_map?(element, color_map)
-        color_map.merge!(element[3] => [element[1], element[2]])
+      old_color = color_map[element[3]]
+
+      if old_color.nil?
+        frequency = 1
+
+        color_map.merge!(element[3] => [element[1], element[2], frequency])
       else
-        color_map
+        frequency = old_color[2] + 1
+
+        if add_element_to_map?(element, color_map)
+          color_map.merge!(element[3] => [element[1], element[2], frequency])
+        else
+          color_map.merge!(
+            element[3] => [old_color[0], old_color[1], frequency]
+          )
+        end
       end
     end
   end
 
   def self.add_element_to_map?(element, color_map)
-    # finds old color value
     old_color = color_map[element[3]]
-
-    return true if old_color.nil?
 
     old_element = [:element, old_color[0], old_color[1], element[3]]
 
@@ -74,15 +83,20 @@ module PbnConverter
 
   def self.remove_insignificant_colors(color_map)
     final_map = {}
-    color_map.each do |color1, value|
-      within_fuzz =
-        final_map.keys.any? do |color2|
+    color_map.each do |color1, new_color|
+      next if new_color[2] < MINIMUM_FREQUENCY
+
+      color_within_fuzz =
+        final_map.keys.find do |color2|
           fuzz_percentage(color1, color2) < FUZZ_PERCENTAGE
         end
 
-      next if within_fuzz
+      old_color = color_map[color_within_fuzz]
 
-      final_map.merge!(color1 => value)
+      # compare frequencies of colors
+      if old_color.nil? || (new_color[2] > old_color[2])
+        final_map.merge!(color1 => new_color)
+      end
     end
 
     final_map
@@ -105,14 +119,14 @@ module PbnConverter
   end
 
   def self.remove_colors_and_add_numbers(input_path, color_map)
-    pointsize = 5
+    pointsize = 10
+
+    color_map = remove_insignificant_colors(color_map)
 
     transparent_string =
       color_map.keys.map do |color|
-        "-transparent '#{color}'"
+        "-opaque '#{color}'"
       end.join(' ')
-
-    color_map = remove_insignificant_colors(color_map)
 
     text_string =
       color_map.values.each_with_index.map do |pos, i|
@@ -125,19 +139,19 @@ module PbnConverter
 
     puts <<-COMMAND
     convert #{input_path} -fuzz 10% \
-     #{transparent_string} \
-     -font Arial -pointsize #{pointsize} -fill black -draw "\
-     #{text_string} \
-     " \
-     -border 20 #{temp_output.path}
-     COMMAND
+    #{transparent_string} \
+    -font Arial -pointsize #{pointsize} -fill black -draw "\
+    #{text_string} \
+    " \
+    -border 20 #{temp_output.path}
+    COMMAND
 
     `convert #{input_path} -fuzz 10% \
-     #{transparent_string} \
+     -fill white #{transparent_string} \
      -font Arial -pointsize #{pointsize} -fill black -draw "\
      #{text_string} \
      " \
-     -border 20 #{temp_output.path}`
+     -border 4 #{temp_output.path}`
 
      temp_output.path
   end
