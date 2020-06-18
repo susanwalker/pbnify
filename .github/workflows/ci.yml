@@ -22,19 +22,19 @@ jobs:
         ruby-version: 2.6.5
     - name: Install ImageMagick
       run: |
-      sudo apt-get update
-      sudo apt-get install build-essential checkinstall libx11-dev libxext-dev zlib1g-dev libpng12-dev libjpeg-dev libfreetype6-dev libxml2-dev
-      cd /opt
-      sudo wget http://www.imagemagick.org/download/ImageMagick.tar.gz
-      sudo tar xvzf ImageMagick.tar.gz
-      cd ImageMagick-7.0.8-2
-      sudo touch configure
-      sudo ./configure
-      sudo make
-      sudo make install
-      sudo ldconfig /usr/local/lib
-      sudo make check
-      convert --version
+        sudo apt-get update
+        sudo apt-get install build-essential checkinstall libx11-dev libxext-dev zlib1g-dev libpng12-dev libjpeg-dev libfreetype6-dev libxml2-dev
+        cd /opt
+        sudo wget http://www.imagemagick.org/download/ImageMagick.tar.gz
+        sudo tar xvzf ImageMagick.tar.gz
+        cd ImageMagick-7.0.8-2
+        sudo touch configure
+        sudo ./configure
+        sudo make
+        sudo make install
+        sudo ldconfig /usr/local/lib
+        sudo make check
+        convert --version
     - name: Install Chromedriver
       run: |
         # Install Chromedriver
