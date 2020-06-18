@@ -1,8 +1,10 @@
 require 'tempfile'
 
 module PbnConverter
-  FUZZ_PERCENTAGE = 10
+  # This should be part of the request form
+  FUZZ_PERCENTAGE = 5
   MINIMUM_FREQUENCY = 60
+  RESIZE_RESOLUTION = '200X200'
 
   # Public
 
@@ -17,6 +19,7 @@ module PbnConverter
   # Private
 
   def self.generate_pbnified(input_path)
+    `convert #{input_path} -resize #{RESIZE_RESOLUTION} #{input_path}`
     color_map = spit_out_colors(input_path)
 
     remove_colors_and_add_numbers(input_path, color_map)
@@ -107,7 +110,7 @@ module PbnConverter
     fr2 = fuzz_radius(color2)
 
     return 100 if (fr1.nil? || fr2.nil?)
-    
+
     (fr1 - fr2).abs / fr1 * 100
   end
 
