@@ -105,12 +105,18 @@ module PbnConverter
   def self.fuzz_percentage(color1, color2)
     fr1 = fuzz_radius(color1)
     fr2 = fuzz_radius(color2)
+
+    return 100 if (fr1.nil? || fr2.nil?)
+    
     (fr1 - fr2).abs / fr1 * 100
   end
 
   def self.fuzz_radius(color)
     regex = /srgba\((\d*),(\d*),(\d*),(\d*)\)/
     color_components = color.match(regex)
+
+    return nil if color_components.nil?
+
     fuzz_radius_sq =
       color_components[1].to_i^2 +
         color_components[2].to_i^2 +
