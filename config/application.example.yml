@@ -1,2 +1,2 @@
-USER: user
-PASSWORD: password
+HTTP_USER: user
+HTTP_PASSWORD: password
