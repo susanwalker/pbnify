@@ -1,5 +1,3 @@
-<br /> <br /> <br />
-
 <p class="font-sans text-3xl text-gray-800 text-center">
   Final PBNified Image
 </p>
@@ -12,8 +10,24 @@
 
 <% if @request.output_image.present? %>
   <div class="flex items-center justify-center">
+    <%= image_tag(url_for(@request.input_image), height: '40', class: "img-responsive") %>
+    <div class="extra-padding"></div>
+    <div class="vertical-line"></div>
     <%= image_tag(url_for(@request.output_image), height: '40', class: "img-responsive") %>
   </div>
 <% else  %>
   <p class="text-red-500">No output available</p>
 <% end %>
+
+<style>
+.vertical-line {
+  border-left: 2px solid lightgray;
+  padding: 0px;
+  padding-left: 40px;
+  height: 200px;
+}
+.extra-padding {
+  padding: 0px;
+  padding-left: 40px;
+}
+</style>
