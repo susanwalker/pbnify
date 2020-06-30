@@ -28,5 +28,11 @@ class RequestsController < ApplicationController
   end
 
   def download
+    id = params.fetch('id')
+    @request = Request.find(id)
+    output =
+      ActiveStorage::Blob.service.send(:path_for, @request.output_image.key)
+
+    send_file(output, filename: 'output.png')
   end
 end
