@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     # This creates a route /requests/:id/download
     # without member would be /requests/download
     member do
-      get 'download'
+      get 'download', to: 'requests#download'
     end
   end
 end
